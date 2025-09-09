@@ -169,7 +169,5 @@ const manageSpinner = (status) => {
   }
 };
 
-// By Default All Items Button Highlight
-
 loadCategory();
 loadAllPlants();

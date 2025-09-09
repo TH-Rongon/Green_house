@@ -100,9 +100,9 @@ Template literals (introduced in ES6) are a new way to work with strings.
 - Allow **multi-line strings** without `\n`.
 
 ```js
-let name = "Ashik";
+let name = "Rongon";
 let age = 25;
 let message = `Hello, my name is ${name} and I am ${age} years old.`;
 console.log(message);
-// Hello, my name is Ashik and I am 25 years old.
+// Hello, my name is Rongon and I am 25 years old.
 ```
