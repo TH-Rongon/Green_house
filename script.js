@@ -104,5 +104,72 @@ const displayPlantDetails = (plant) => {
   document.getElementById("my_modal_5").showModal();
 };
 
+// Card Container Click (Add to Cart)
+cardContainer.addEventListener("click", (e) => {
+  if (e.target.innerText === "Add to Cart") {
+    const cardTitle = e.target.parentNode.children[1].innerText;
+    const price = e.target.parentNode.children[3].children[1].innerText;
+    alert(`${cardTitle} has been added to the cart`);
+    addToCart(cardTitle, price);
+    priceContainer.classList.remove("hidden");
+  }
+});
+
+// Cart Item Add
+const addToCart = (cardTitle, price) => {
+  price = Number(price);
+  totalPrice += price;
+
+  const itemDiv = document.createElement("div");
+  itemDiv.classList.add(
+    "flex",
+    "justify-between",
+    "items-center",
+    "bg-green-100",
+    "rounded",
+    "border-b",
+    "border-gray-400",
+    "p-2",
+    "m-1"
+  );
+
+  itemDiv.innerHTML = `
+    <div>
+      <p>${cardTitle}</p>
+      <p class="text-sm font-semibold">&#2547; <span class="item-price">${price}</span></p>
+    </div>
+    <div>
+      <i class="fa-solid fa-xmark remove-item" style="color: #dc0909; cursor:pointer;"></i>
+    </div>
+  `;
+
+  cartContainer.insertBefore(itemDiv, priceContainer);
+  totalPriceEl.innerText = totalPrice;
+};
+
+// Cart Remove
+cartContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove-item")) {
+    const itemDiv = e.target.parentNode.parentNode;
+    const itemPrice = Number(itemDiv.querySelector(".item-price").innerText);
+    totalPrice -= itemPrice;
+    totalPriceEl.innerText = totalPrice;
+    itemDiv.remove();
+  }
+});
+
+// Manage Spinner
+const manageSpinner = (status) => {
+  if (status) {
+    loadingSpinner.classList.remove("hidden");
+    cartContainer.classList.add("hidden");
+  } else {
+    loadingSpinner.classList.add("hidden");
+    cartContainer.classList.remove("hidden");
+  }
+};
+
+// By Default All Items Button Highlight
+
 loadCategory();
 loadAllPlants();
